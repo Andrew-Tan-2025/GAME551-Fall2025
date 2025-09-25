@@ -10,7 +10,7 @@ server.get("/", function (req, res) {
 
 
 server.use(bodyParser());
-server.use(express.static(__dirname + '/public'));
+server.use(express.static(__dirname + '/docs'));
 
 console.log("Simple static server listening at http://" + hostname + ":" + port);
 server.listen(port);
