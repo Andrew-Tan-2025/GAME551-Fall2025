@@ -328,7 +328,7 @@ var doLogout = function()
         // Get the position offset in world space from the tracking space origin
         // to the player's feet. The headPose position is the head position in world space.
         // Subtract the tracking space origin position in world space to get a relative world space vector.
-        vec3.set(playerInWorldSpaceOld, headPose.transform.position.x, 3, headPose.transform.position.z);
+        vec3.set(playerInWorldSpaceOld, headPose.transform.position.x, 5, headPose.transform.position.z);
         vec3.sub(
           playerOffsetInWorldSpaceOld,
           playerInWorldSpaceOld,
