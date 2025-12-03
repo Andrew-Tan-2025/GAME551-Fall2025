@@ -138,7 +138,7 @@ var doLogout = function()
       let trackingSpaceOriginInWorldSpace = vec3.create();
       let trackingSpaceHeadingDegrees = 0;  // around +Y axis, positive angles rotate left
       let floorSize = 140;
-      let floorPosition = [0, -floorSize / 2 + 0.01, 0];
+      let floorPosition = [0, -floorSize / 2 - 0.1, 0];
       let floorNode = null;
 
       // WebGL scene globals.
@@ -148,7 +148,6 @@ var doLogout = function()
       if (hideStats) {
         scene.enableStats(false);
       }
-      // var x = new Gltf2Node({url: 'cube-room/cube-room.gltf'});
       var x = new Gltf2Node({url: 'MurdockApartment/MurodckApart.gltf'});
       x.scale = [15,15,15];
       scene.addNode(x);
@@ -328,7 +327,7 @@ var doLogout = function()
         // Get the position offset in world space from the tracking space origin
         // to the player's feet. The headPose position is the head position in world space.
         // Subtract the tracking space origin position in world space to get a relative world space vector.
-        vec3.set(playerInWorldSpaceOld, headPose.transform.position.x, 3, headPose.transform.position.z);
+        vec3.set(playerInWorldSpaceOld, headPose.transform.position.x, -4, headPose.transform.position.z);
         vec3.sub(
           playerOffsetInWorldSpaceOld,
           playerInWorldSpaceOld,
