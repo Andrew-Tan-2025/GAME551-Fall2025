@@ -117,8 +117,9 @@ var doLogout = function()
       // Load a glTF resource
       loader.load('MurdockApartment/MurodckApart.gltf', (gltf) => {
             scene.add(gltf.scene);
-            // scale
-            gltf.scene.scale.set(5, 5, 5);
+            // move & scale
+            gltf.scene.position.set(0, 0, 2.2);
+            //gltf.scene.scale.set(5, 5, 5);
         });
       // Set background color of the scene to gray
       scene.background = new THREE.Color(0x505050);
