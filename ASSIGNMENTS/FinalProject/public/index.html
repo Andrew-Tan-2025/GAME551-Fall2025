@@ -108,7 +108,8 @@ var doLogout = function()
       import * as THREE from 'https://cdn.jsdelivr.net/gh/mesquite-mocap/mesquite.cc/build-static/three.module.js';
       import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mesquite-mocap/mesquite.cc/build-static/GLTFLoader.js';
       // Import the default VRButton
-      import { VRButton } from 'https://unpkg.com/three/examples/jsm/webxr/VRButton.js';
+      import { VRButton } from 'https://cdn.jsdelivr.net/gh/mesquite-mocap/mesquite.cc/build-static/VRButton.js';
+      import { XRControllerModelFactory } from 'https://cdn.jsdelivr.net/gh/mesquite-mocap/mesquite.cc/build-static/XRControllerModelFactory.js';
 
       // Make a new scene
       let scene = new THREE.Scene();
@@ -134,20 +135,7 @@ var doLogout = function()
       light.position.set(1, 1, 1).normalize();
       scene.add(light);
       scene.add(new THREE.AmbientLight(0xffffff,0.5))
-
-      /*
-      // Make a red cube
-      let cube = new THREE.Mesh(
-          new THREE.BoxGeometry(1,1,1),
-          new THREE.MeshLambertMaterial({color:'red'})
-      );
-      cube.position.set(0, 1.5, -10);
-      scene.add(cube);
-      */
-
-      // Add Murdock Apartment
-
-
+      
       // Make a renderer that fills the screen
       let renderer = new THREE.WebGLRenderer({antialias: true});
       renderer.setPixelRatio(window.devicePixelRatio);
@@ -161,12 +149,44 @@ var doLogout = function()
       // Add a button to enter/exit vr to the page
       document.body.appendChild(VRButton.createButton(renderer));
 
-      // For AR instead, import ARButton at the top
-      //    import { ARButton } from 'https://unpkg.com/three/examples/jsm/webxr/ARButton.js';
-      // then create the button
-      //  document.body.appendChild(ARButton.createButton(renderer));
+      /*
+      // Add Controllers & visuals
+      const controller1 = renderer.xr.getController( 0 ); // Get the first controller (index 0)
+      const controllerGrip1 = renderer.xr.getControllerGrip( 0 );
+      controllerGrip1.add( controllerModelFactory.createControllerModel( controllerGrip1 ) );
+      scene.add( controllerGrip1 );
+      scene.add( controller1 );
 
-      // Handle browser resize
+      const controller2 = renderer.xr.getController( 1 ); // Get the second controller (index 1)
+      const controllerGrip2 = renderer.xr.getControllerGrip( 1 );
+      controllerGrip2.add( controllerModelFactory.createControllerModel( controllerGrip2 ) );
+      scene.add( controllerGrip2 );
+      scene.add( controller2 );
+
+      const controllerModelFactory = new XRControllerModelFactory();
+      
+      //Controllers Event Handler
+      controller1.addEventListener( 'connected', ( event ) => {
+        if (event.data.handedness == "left" ){
+          //do something here
+        }
+        if (event.data.handedness == "right" ){
+          //do something here
+        }
+        //get buttons inputs from controller 1
+        controller1.gamepad = event.data.gamepad;	
+      });
+      controller2.addEventListener( 'connected', ( event ) => {
+        if (event.data.handedness == "left" ){
+          //do something here
+          }
+        if (event.data.handedness == "right" ){
+          //do something here
+          }
+        //get buttons inputs from controller 1
+        controller2.gamepad = event.data.gamepad;	
+      });*/
+
       window.addEventListener('resize', onWindowResize, false);
 
       function onWindowResize() {
