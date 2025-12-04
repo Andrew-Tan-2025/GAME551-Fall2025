@@ -109,6 +109,7 @@ var doLogout = function()
       import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mesquite-mocap/mesquite.cc/build-static/GLTFLoader.js';
       // Import the default VRButton
       import { VRButton } from 'https://cdn.jsdelivr.net/gh/mesquite-mocap/mesquite.cc/build-static/VRButton.js';
+      import {mat4, vec3, quat} from './js/render/math/gl-matrix.js';
       //import { XRControllerModelFactory } from 'https://cdn.jsdelivr.net/gh/mesquite-mocap/mesquite.cc/build-static/XRControllerModelFactory.js';
 
       // Make a new scene
@@ -119,8 +120,7 @@ var doLogout = function()
       loader.load('MurdockApartment/MurodckApart.gltf', (gltf) => {
             scene.add(gltf.scene);
             // move & scale
-            gltf.scene.position.set(0, 0, 2.2);
-            //gltf.scene.scale.set(5, 5, 5);
+            gltf.scene.position.set(0, -2, 2.2);
         });
       // Set background color of the scene to gray
       scene.background = new THREE.Color(0x505050);
@@ -142,6 +142,7 @@ var doLogout = function()
       renderer.setSize(window.innerWidth, window.innerHeight);
       // Turn on VR support
       renderer.xr.enabled = true;
+      renderer.xr.setReferenceSpaceType( 'local' ); 
       // Set animation loop
       renderer.setAnimationLoop(render);
       // Add canvas to the page
@@ -149,26 +150,28 @@ var doLogout = function()
       // Add a button to enter/exit vr to the page
       document.body.appendChild(VRButton.createButton(renderer));
 
-      /*
       // Add Controllers & visuals
       const controller1 = renderer.xr.getController( 0 ); // Get the first controller (index 0)
-      const controllerGrip1 = renderer.xr.getControllerGrip( 0 );
-      controllerGrip1.add( controllerModelFactory.createControllerModel( controllerGrip1 ) );
-      scene.add( controllerGrip1 );
       scene.add( controller1 );
 
       const controller2 = renderer.xr.getController( 1 ); // Get the second controller (index 1)
-      const controllerGrip2 = renderer.xr.getControllerGrip( 1 );
+      scene.add( controller2 );
+      
+      /*
+      const controllerModelFactory = new XRControllerModelFactory();
+      const controllerGrip1 = renderer.xr.getControllerGrip( 0 ); //controller 1 grip
+      controllerGrip1.add( controllerModelFactory.createControllerModel( controllerGrip1 ) );
+      scene.add( controllerGrip1 );
+      const controllerGrip2 = renderer.xr.getControllerGrip( 1 ); //controller 2 grip
       controllerGrip2.add( controllerModelFactory.createControllerModel( controllerGrip2 ) );
       scene.add( controllerGrip2 );
-      scene.add( controller2 );
-
-      const controllerModelFactory = new XRControllerModelFactory();
+      */
       
       //Controllers Event Handler
       controller1.addEventListener( 'connected', ( event ) => {
         if (event.data.handedness == "left" ){
           //do something here
+          console.log("Left1")
         }
         if (event.data.handedness == "right" ){
           //do something here
@@ -179,13 +182,14 @@ var doLogout = function()
       controller2.addEventListener( 'connected', ( event ) => {
         if (event.data.handedness == "left" ){
           //do something here
-          }
+        }
         if (event.data.handedness == "right" ){
           //do something here
-          }
+          
+        }
         //get buttons inputs from controller 1
         controller2.gamepad = event.data.gamepad;	
-      });*/
+      });
 
       window.addEventListener('resize', onWindowResize, false);
 
