@@ -137,7 +137,7 @@ var doLogout = function()
 
       let trackingSpaceOriginInWorldSpace = vec3.create();
       let trackingSpaceHeadingDegrees = 0;  // around +Y axis, positive angles rotate left
-      let floorSize = 140;
+      let floorSize = 200;
       let floorPosition = [0, -floorSize / 2 + 0.01, 0];
       let floorNode = null;
 
@@ -149,7 +149,6 @@ var doLogout = function()
         scene.enableStats(false);
       }
       var x = new Gltf2Node({url: 'MurdockApartment/MurodckApart.gltf'});
-      //ASSIGNMENTS\FinalProject\public\MurdockApartment\MurodckApart.gltf
       //Add Gtlf2Node for Murdock Apartment
       //x.scale = [15,15,15];
       scene.addNode(x);
